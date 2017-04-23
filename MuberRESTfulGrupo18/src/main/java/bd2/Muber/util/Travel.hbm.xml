@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping package="main.java.model">
+<class name="Travel" table="TRAVEL">	
+					
+	<id name="idTravel"  column="ID_TRAVEL">
+		<generator class="increment"/>
+	</id>
+	<property name="origin"  column="ORIGIN"/>
+ 	<property name="destination"  column="DESTINATION"/>
+	<property name="date"  column="DATE"/>
+	<property name="passengerCount"  column="PASSENGERCOUNT"/>
+	<property name="totalAmount"  column="TOTAL_AMOUNT"/>
+	<property name="isFinalised"  column="IS_FINALISED"/>
+	
+	<many-to-one name="driver" column="ID_USER" 
+       class="Driver" not-null="true"/>
+     
+    <set name="passengers" table="TRAVEL_PASSENGER" cascade="all">
+    	<key column="ID_TRAVEL"/>
+        <many-to-many column="ID_USER" class="Passenger" />
+    </set>
+</class>
+</hibernate-mapping>

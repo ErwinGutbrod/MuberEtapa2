@@ -1,0 +1,18 @@
+<?xml version="1.0"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping package="main.java.model">
+	<class name="User" table="USER">
+		<id name="idUser" column="ID_USER">
+			<generator class="increment"/>
+		</id>
+		<property name="name"/>
+		<property name="password"/>
+		<property name="startDate"/>
+	<union-subclass name="Driver" table="USER_DRIVER">
+		<property name="licenseExpirationDate"/>
+	</union-subclass>
+	<union-subclass name="Passenger" table="USER_PASSENGER">
+		<property name="credit"/>
+	</union-subclass>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping package="main.java.model">
+<class name="Review" table="REVIEW">						
+	<id name="idReview"  column="ID_REVIEW">
+		<generator class="increment"/>
+	</id>
+	
+	<property name="rate"  column="RATE"/>
+	<property name="review"  column="REVIEW"/>
+	
+	<many-to-one name="passenger" class="Passenger" column="ID_USER"  not-null="true" cascade="all" />
+	<many-to-one name="travel" class="Travel" column="ID_TRAVEL"  not-null="true" cascade="all" />
+
+</class>
+</hibernate-mapping>
