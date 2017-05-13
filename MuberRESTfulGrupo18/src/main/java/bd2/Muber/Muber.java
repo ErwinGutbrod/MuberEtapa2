@@ -13,85 +13,35 @@ import bd2.Muber.model.Review;
 import bd2.Muber.model.Travel;
 
 public class Muber {
-	
-	//Properties
-	private ArrayList<Driver> drivers;
-	private ArrayList<Passenger> passengers;
-	private ArrayList<Travel> travels;
-	private ArrayList<Review> reviews;
-	
-	//Constructor
-	public Muber(){
-		this.drivers = new ArrayList<Driver>();
-		this.passengers = new ArrayList<Passenger>();
-		this.travels = new ArrayList<Travel>();
-		this.reviews = new ArrayList<Review>();
-	}
 
 	public void AddDriver(Driver driver) {
-		this.drivers.add(driver);		
+		Configuration cfg = new Configuration().configure("/main/java/hibernate/hibernate.cfg.xml");
+		SessionFactory sessionFactory= cfg.buildSessionFactory();
+		PersistObject(sessionFactory,driver);
+		sessionFactory.close();
 	}
 
 	public void AddTravel(Travel travel) {
-		this.travels.add(travel);		
+		Configuration cfg = new Configuration().configure("/main/java/hibernate/hibernate.cfg.xml");
+		SessionFactory sessionFactory= cfg.buildSessionFactory();
+		PersistObject(sessionFactory,travel);
 	}
 
 	public void AddPassenger(Passenger passenger) {
-		this.passengers.add(passenger);		
+		Configuration cfg = new Configuration().configure("/main/java/hibernate/hibernate.cfg.xml");
+		SessionFactory sessionFactory= cfg.buildSessionFactory();
+		PersistObject(sessionFactory,passenger);
 	}
 
 	public void AddPassengerToTravel(Travel travel, Passenger passenger1) {
-		
-		for(Travel tr : this.travels) { 
-			   if(tr.getIdTravel() == travel.getIdTravel()) { 
-				   if(tr.getPassengers().size() < tr.getPassengerCount()){
-					   tr.getPassengers().add(passenger1);
-				   }
-			      
-			   }
-			}
-		
+
 	}
 
 	public void EndTravel(Travel travel) {
-		for(Travel tr : this.travels) { 
-			   if(tr.getIdTravel() == travel.getIdTravel()) { 
-			      tr.setIsFinalised(true);
-			      for(Passenger passenger : tr.getPassengers()) { 
-					   passenger.setCredit(passenger.getCredit() - (tr.getTotalAmount()/tr.getPassengers().size()));
-
-					 
-				  }
-			   }
-		}
 		
 	}
 
 	public void AddReviewTravel(Review review) {
-		this.reviews.add(review);
-		
-	}
-
-	public void SaveChanges() {
-		Configuration cfg = new Configuration().configure("/main/java/hibernate/hibernate.cfg.xml");
-		SessionFactory sessionFactory= cfg.buildSessionFactory();
-		
-		for(Driver driver : this.drivers) {
-			PersistObject(sessionFactory,driver);
-		} 
-		
-		for(Passenger passenger : this.passengers) {
-			PersistObject(sessionFactory,passenger);
-		} 
-		
-		for(Travel travel : this.travels) {
-			PersistObject(sessionFactory,travel);
-		} 
-		
-		for(Review review : this.reviews) {
-			PersistObject(sessionFactory,review);
-		} 
-		
 		
 	}
 	
@@ -106,38 +56,34 @@ public class Muber {
 			e.printStackTrace();
 			session.getTransaction().rollback();
 		}
+		session.cancelQuery();
 	}
 
 	public ArrayList<Driver> getDrivers() {
-		return drivers;
 	}
 
 	public void setDrivers(ArrayList<Driver> drivers) {
-		this.drivers = drivers;
 	}
 
 	public ArrayList<Passenger> getPassengers() {
-		return passengers;
+		return null;
 	}
 
 	public void setPassengers(ArrayList<Passenger> passengers) {
-		this.passengers = passengers;
 	}
 
 	public ArrayList<Travel> getTravels() {
-		return travels;
+		return null;
 	}
 
 	public void setTravels(ArrayList<Travel> travels) {
-		this.travels = travels;
 	}
 
 	public ArrayList<Review> getReviews() {
-		return reviews;
+		return null;
 	}
 
 	public void setReviews(ArrayList<Review> reviews) {
-		this.reviews = reviews;
 	}
 
 

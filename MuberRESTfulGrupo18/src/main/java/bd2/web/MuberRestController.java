@@ -7,6 +7,7 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.google.gson.Gson;
 
-import bd2.Muber.Muber;
-import bd2.Muber.model.Passenger;
+import bd2.web.service.MuberService;
 
 @ControllerAdvice
 @RequestMapping("/services")
@@ -25,21 +25,15 @@ import bd2.Muber.model.Passenger;
 @EnableWebMvc
 public class MuberRestController {
 
-	Muber muber = new Muber();
-	protected Session getSession() {
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
-		Session session = factory.openSession();
-		return session;
-	}
-
+	@Autowired
+	MuberService muberServbice;  
+	
 	@RequestMapping(value = "/pasajeros", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
 	public String getPassengers() {
 		
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
-		aMap.put("pasajeros", muber.getPassengers());
+		aMap.put("pasajeros", muberServbice.getPassengers());
 
 		return new Gson().toJson(aMap);
 	}

@@ -5,10 +5,10 @@ import java.util.Calendar;
 public abstract class User {
 
 	//Attributes
-	private int idUser;
-	private String name;
-	private String password;
-	private Calendar startDate;
+	protected int idUser;
+	protected String name;
+	protected String password;
+	protected Calendar startDate;
 	
 	//Constructors
 	public User() {
