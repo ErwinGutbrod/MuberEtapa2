@@ -16,11 +16,11 @@ public interface MuberService {
 	public void AddPassengerToTravel(Travel travel, Passenger passenger1);
 	public void EndTravel(Travel travel);
 	public void AddReviewTravel(Review review);
-	public ArrayList<Driver> getDrivers();
+	public List<Driver> getDrivers();
 	public void setDrivers(ArrayList<Driver> drivers);
 	public List<Passenger> getPassengers();
 	public void setPassengers(ArrayList<Passenger> passengers);
-	public ArrayList<Travel> getTravels();
+	public List<Travel> getOpenTravels();
 	public void setTravels(ArrayList<Travel> travels);
 	public ArrayList<Review> getReviews();
 	public void setReviews(ArrayList<Review> reviews);

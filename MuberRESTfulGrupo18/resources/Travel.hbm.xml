@@ -17,9 +17,9 @@
 	<property name="isFinalised"  column="IS_FINALISED"/>
 	
 	<many-to-one name="driver" column="ID_USER" 
-       class="Driver" not-null="true"/>
+       class="Driver" not-null="true" lazy="false"/>
      
-    <set name="passengers" table="TRAVEL_PASSENGER" cascade="all">
+    <set name="passengers" table="TRAVEL_PASSENGER" lazy="false" cascade="all">
     	<key column="ID_TRAVEL"/>
         <many-to-many column="ID_USER" class="Passenger" />
     </set>

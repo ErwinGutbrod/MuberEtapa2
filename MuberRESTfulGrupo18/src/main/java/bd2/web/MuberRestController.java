@@ -3,6 +3,8 @@ package bd2.web;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.google.gson.Gson;
 
 import bd2.Muber.model.Passenger;
+import bd2.Muber.model.Travel;
 import bd2.web.service.MuberService;
 
 @ControllerAdvice
@@ -44,6 +47,7 @@ public class MuberRestController {
 	public String getDrivers() {
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
+		aMap.put("conductores", muberService.getDrivers());
 		return new Gson().toJson(aMap);
 	}
 	
@@ -51,6 +55,7 @@ public class MuberRestController {
 	public String getTravelOpened() {
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
+		aMap.put("viajes", muberService.getOpenTravels());
 		return new Gson().toJson(aMap);
 	}
 	
