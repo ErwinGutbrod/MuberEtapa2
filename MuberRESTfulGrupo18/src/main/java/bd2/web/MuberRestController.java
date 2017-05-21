@@ -1,15 +1,12 @@
 package bd2.web;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +17,7 @@ import com.google.gson.Gson;
 
 import bd2.Muber.model.Passenger;
 import bd2.web.service.MuberService;
+import mapping.AgregarPasajero;
 
 @ControllerAdvice
 @RequestMapping("/services")
@@ -94,13 +92,12 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
-	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
-	public String addPassengerInTravel(
-			@RequestParam(value="viajeId", required = true) String conductorId,
-			@RequestParam(value="pasajeroId", required = true) String pasajeroId) {
+	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT)
+	public @ResponseBody String addPassengerInTravel(
+			@RequestBody AgregarPasajero agregarPasajero) {
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
-		return new Gson().toJson(aMap);
+		return "o";
 	}
 	
 	@RequestMapping(value = "/viajes/calificar", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
