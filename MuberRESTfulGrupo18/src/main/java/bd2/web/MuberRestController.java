@@ -96,13 +96,13 @@ public class MuberRestController {
 		aMap.put("result", "OK");
 		return new Gson().toJson(aMap);
 	}
+
 	
-	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT)
-	public @ResponseBody String addPassengerInTravel(
-			@RequestBody AgregarPasajero agregarPasajero) {
+	@RequestMapping(value = "/agregarpasajero", method = RequestMethod.PUT, produces = "application/json")
+	public String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
-		return "o";
+		return new Gson().toJson(aMap);
 	}
 	
 	@RequestMapping(value = "/viajes/calificar", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
