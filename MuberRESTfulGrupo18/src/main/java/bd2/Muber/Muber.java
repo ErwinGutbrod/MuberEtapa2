@@ -143,7 +143,16 @@ public class Muber {
 	public void setReviews(ArrayList<Review> reviews) {
 	}
 
-
+	public Driver getDriver(int id){
+		Driver driver = null;
+		try {
+			driver = this.getDriver(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return driver;
+	}
 
 	
 }
