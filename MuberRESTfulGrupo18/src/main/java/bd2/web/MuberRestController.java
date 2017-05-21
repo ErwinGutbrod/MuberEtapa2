@@ -1,6 +1,7 @@
 package bd2.web;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.google.gson.Gson;
 
+import bd2.Muber.model.Passenger;
 import bd2.web.service.MuberService;
 
 @ControllerAdvice
@@ -56,6 +58,25 @@ public class MuberRestController {
 	public String getDriverDetail(
 			@RequestParam(value="conductorId", required = true) String conductorId) {
 		// Obtener  la  información  de  un  conductor  (nombre  de  usuario, viajes  realizados,  puntaje promedio y fecha de licencia
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK");
+		return new Gson().toJson(aMap);
+	}
+	
+	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
+	public String getNewPassenger(
+			@RequestParam(value="ID_USER", required = true) int ID_USER,
+			@RequestParam(value="name", required = true) String name,
+			@RequestParam(value="password", required = true) String password,
+			@RequestParam(value="startDate", required = true) Calendar startDate,
+			@RequestParam(value="credit", required = true) double credit) {
+		Passenger passenger = new Passenger();
+		passenger.setIdUser(ID_USER);
+		passenger.setName(name);
+		passenger.setPassword(password);
+		passenger.setStartDate(startDate);
+		passenger.setCredit(credit);
+		muberService.AddPassenger(passenger);
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
 		return new Gson().toJson(aMap);

@@ -3,7 +3,7 @@ package bd2.Muber.model;
 public class Passenger  extends User{
 
 	//Attributes
-	private long credit;
+	private double credit;
 	
 	//Constructor
 	public Passenger() {
@@ -11,10 +11,10 @@ public class Passenger  extends User{
 	}
 	
 	//Getters & Setters
-	public long getCredit() {
+	public double getCredit() {
 		return credit;
 	}
-	public void setCredit(long credit) {
+	public void setCredit(double credit) {
 		this.credit = credit;
 	}
 	
