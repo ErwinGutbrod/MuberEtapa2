@@ -1,6 +1,7 @@
 package bd2.web.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -31,6 +32,7 @@ public class MuberServiceImpl implements MuberService{
 
 	@Override
 	public void AddPassenger(Passenger passenger) {
+		this.muber.AddPassenger(passenger);
 	}
 
 	@Override
@@ -64,9 +66,8 @@ public class MuberServiceImpl implements MuberService{
 	}
 
 	@Override
-	public ArrayList<Passenger> getPassengers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Passenger> getPassengers() {
+		return muber.getPassengers();
 	}
 
 	@Override

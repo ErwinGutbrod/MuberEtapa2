@@ -1,36 +1,71 @@
 package bd2.Muber;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import DAO.DriverDAO;
+import DAO.PassengerDAO;
+import DAO.ReviewDAO;
+import DAO.TravelDAO;
+import DAOHibernateImpl.DriverDAOHibernateImpl;
+import DAOHibernateImpl.PassengerDAOHibernateImpl;
+import DAOHibernateImpl.ReviewDAOHibernateImpl;
+import DAOHibernateImpl.TravelDAOHibernateImpl;
 import bd2.Muber.model.Driver;
 import bd2.Muber.model.Passenger;
 import bd2.Muber.model.Review;
 import bd2.Muber.model.Travel;
 
 public class Muber {
+	
+	//DAOs
+	protected DriverDAO DAODriver;
+	protected PassengerDAO DAOPassenger;
+	protected TravelDAO DAOTravel;
+	protected ReviewDAO DAOReview;
 
+	//Constructor
+	
+	public Muber(){
+		super();
+		//Initialize daos;
+		DAODriver = new DriverDAOHibernateImpl();
+		DAOPassenger = new PassengerDAOHibernateImpl();
+		DAOTravel = new TravelDAOHibernateImpl();
+		DAOReview = new ReviewDAOHibernateImpl();
+	}
+	
+	//Methods
 	public void AddDriver(Driver driver) {
-		Configuration cfg = new Configuration().configure("/main/java/hibernate/hibernate.cfg.xml");
-		SessionFactory sessionFactory= cfg.buildSessionFactory();
-		PersistObject(sessionFactory,driver);
-		sessionFactory.close();
+		try {
+			this.DAODriver.save(driver);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void AddTravel(Travel travel) {
-		Configuration cfg = new Configuration().configure("/main/java/hibernate/hibernate.cfg.xml");
-		SessionFactory sessionFactory= cfg.buildSessionFactory();
-		PersistObject(sessionFactory,travel);
+		try {
+			this.DAOTravel.save(travel);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void AddPassenger(Passenger passenger) {
-		Configuration cfg = new Configuration().configure("/main/java/hibernate/hibernate.cfg.xml");
-		SessionFactory sessionFactory= cfg.buildSessionFactory();
-		PersistObject(sessionFactory,passenger);
+		try {
+			this.DAOPassenger.save(passenger);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void AddPassengerToTravel(Travel travel, Passenger passenger1) {
@@ -66,8 +101,15 @@ public class Muber {
 	public void setDrivers(ArrayList<Driver> drivers) {
 	}
 
-	public ArrayList<Passenger> getPassengers() {
-		return null;
+	public List<Passenger> getPassengers() {
+		List<Passenger> passengers = null;
+		try {
+			passengers = this.DAOPassenger.findAll(Passenger.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return passengers;
 	}
 
 	public void setPassengers(ArrayList<Passenger> passengers) {

@@ -26,14 +26,14 @@ import bd2.web.service.MuberService;
 public class MuberRestController {
 
 	@Autowired
-	MuberService muberServbice;  
+	MuberService muberService;  
 	
 	@RequestMapping(value = "/pasajeros", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
 	public String getPassengers() {
 		
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
-		aMap.put("pasajeros", muberServbice.getPassengers());
+		aMap.put("pasajeros", muberService.getPassengers());
 
 		return new Gson().toJson(aMap);
 	}
