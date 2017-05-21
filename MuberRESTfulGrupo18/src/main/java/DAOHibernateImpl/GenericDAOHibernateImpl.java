@@ -17,7 +17,7 @@ protected static SessionFactory sessionFactory;
 	
 	public GenericDAOHibernateImpl() {
 		if(sessionFactory == null){
-		Configuration cfg = new Configuration().configure("/resources/hibernate.cfg.xml");
+		Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
 		sessionFactory= cfg.buildSessionFactory();
 		}		
 	}

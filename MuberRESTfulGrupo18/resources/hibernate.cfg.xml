@@ -21,9 +21,9 @@
 		<property name="hibernate.format_sql">true</property>
 
 		<!-- Incluir mappings aquí -->
-		<mapping resource="main/java/hibernate/User.hbm.xml" /> 
-		<mapping resource="main/java/hibernate/Travel.hbm.xml" />
-		<mapping resource="main/java/hibernate/Review.hbm.xml" />
+		<mapping resource="User.hbm.xml" /> 
+		<mapping resource="Travel.hbm.xml" />
+		<mapping resource="Review.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

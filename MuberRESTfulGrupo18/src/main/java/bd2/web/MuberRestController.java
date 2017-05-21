@@ -65,17 +65,17 @@ public class MuberRestController {
 	
 	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 	public String getNewPassenger(
-			@RequestParam(value="ID_USER", required = true) int ID_USER,
+			@RequestParam(value="ID_USER", required = true) String ID_USER,
 			@RequestParam(value="name", required = true) String name,
 			@RequestParam(value="password", required = true) String password,
-			@RequestParam(value="startDate", required = true) Calendar startDate,
-			@RequestParam(value="credit", required = true) double credit) {
+			@RequestParam(value="startDate", required = true) String startDate,
+			@RequestParam(value="credit", required = true) String credit) {
 		Passenger passenger = new Passenger();
-		passenger.setIdUser(ID_USER);
+		passenger.setIdUser(Integer.parseInt(ID_USER));
 		passenger.setName(name);
 		passenger.setPassword(password);
-		passenger.setStartDate(startDate);
-		passenger.setCredit(credit);
+		passenger.setStartDate(Calendar.getInstance());
+		passenger.setCredit(Double.parseDouble(credit));
 		muberService.AddPassenger(passenger);
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
