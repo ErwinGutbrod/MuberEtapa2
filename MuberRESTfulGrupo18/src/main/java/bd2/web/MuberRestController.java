@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 
 import bd2.Muber.model.Driver;
 import bd2.Muber.model.Passenger;
+import bd2.Muber.model.Review;
 import bd2.Muber.model.Travel;
 import bd2.web.service.MuberService;
 import mapping.AgregarPasajero;
@@ -61,9 +62,25 @@ public class MuberRestController {
 	@RequestMapping(value = "/conductores/detalle", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
 	public String getDriverDetail(
 			@RequestParam(value="conductorId", required = true) String conductorId) {
+		Driver driver = muberService.getDriver(Integer.parseInt(conductorId));
+		List<Travel> driverTravels = muberService.getTravelsFromDriver(driver);
+		List<Review> driverReviews = muberService.getReviewsFromDriver(driver);
+		int scoreSum = 0;
+		int scoreCount = 0;
+		double averageScore = 0;
+		for (Iterator<Review> i = driverReviews.iterator(); i.hasNext();) {
+		    Review item = i.next();
+		    scoreSum+=item.getRate();
+		    scoreCount++;
+		}
+		averageScore = scoreSum/scoreCount;
 		// Obtener  la  información  de  un  conductor  (nombre  de  usuario, viajes  realizados,  puntaje promedio y fecha de licencia
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
+		aMap.put("userName", driver.getName());
+		aMap.put("driverTravels", driverTravels);
+		aMap.put("averageScore", averageScore);
+		aMap.put("licenseExpiration", driver.getLicenseExpirationDate());
 		return new Gson().toJson(aMap);
 	}
 	

@@ -146,12 +146,34 @@ public class Muber {
 	public Driver getDriver(int id){
 		Driver driver = null;
 		try {
-			driver = this.getDriver(id);
+			driver = this.DAODriver.get(Driver.class, id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return driver;
+	}
+	
+	public List<Travel> getTravelsFromDriver(Driver driver){
+		List<Travel> travels = null;
+		try {
+			travels = this.DAOTravel.getTravelsFromDriver(driver);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return travels;
+	}
+	
+	public List<Review> getReviewsFromDriver(Driver driver){
+		List<Review> reviews = null;
+		try {
+			reviews = this.DAOReview.getReviewsFromDriver(driver);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return reviews;
 	}
 
 	

@@ -98,19 +98,6 @@ public class MuberServiceImpl implements MuberService{
 		
 	}
 	
-	private void PersistObject (SessionFactory sf,Object o){
-		Session session = sf.getCurrentSession();
-		try{
-			session.beginTransaction();
-			session.save(o);
-			session.getTransaction().commit();
-		}
-		catch (HibernateException e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-	}
-
 	@Override
 	public Driver getDriver(int id) {
 		// TODO Auto-generated method stub
@@ -121,6 +108,16 @@ public class MuberServiceImpl implements MuberService{
 	public boolean idTravelFinaliced(int idTravel) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Travel> getTravelsFromDriver(Driver driver) {
+		return muber.getTravelsFromDriver(driver);
+	}
+
+	@Override
+	public List<Review> getReviewsFromDriver(Driver driver) {
+		return muber.getReviewsFromDriver(driver);
 	}
 
 }

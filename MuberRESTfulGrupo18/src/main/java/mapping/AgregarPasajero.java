@@ -2,8 +2,8 @@ package mapping;
 
 
 public class AgregarPasajero {
-	private int viajeId;
-	private int pasajeroId;
+	 int viajeId;
+	 int pasajeroId;
 	
 	public int getViajeId() {
 		return viajeId;

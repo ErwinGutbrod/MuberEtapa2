@@ -10,23 +10,34 @@ import bd2.Muber.model.Travel;
 
 public interface MuberService {
 
+	//Driver
 	public void AddDriver(Driver driver);
-	public void AddTravel(Travel travel);
-	public void AddPassenger(Passenger passenger);
-	public void AddPassengerToTravel(Travel travel, Passenger passenger1);
-	public void EndTravel(Travel travel);
-	public void AddReviewTravel(Review review);
+	public Driver getDriver(int id);
 	public List<Driver> getDrivers();
 	public void setDrivers(ArrayList<Driver> drivers);
-	public List<Passenger> getPassengers();
-	public void setPassengers(ArrayList<Passenger> passengers);
+	//Travel
+	public void AddTravel(Travel travel);
 	public List<Travel> getOpenTravels();
-	public void setTravels(ArrayList<Travel> travels);
+	public void AddPassenger(Passenger passenger);
+	public void AddPassengerToTravel(Travel travel, Passenger passenger1);
+	public List<Travel> getTravelsFromDriver(Driver driver);
+	public void EndTravel(Travel travel);
+	public boolean idTravelFinaliced(int idTravel);
+	
+	//Review
+	public void AddReviewTravel(Review review);
 	public ArrayList<Review> getReviews();
 	public void setReviews(ArrayList<Review> reviews);
+	public List<Review> getReviewsFromDriver(Driver driver);
 	
-	public Driver getDriver(int id);
-	public boolean idTravelFinaliced(int idTravel);
+	//Passengers
+	public List<Passenger> getPassengers();
+	public void setPassengers(ArrayList<Passenger> passengers);	
+	public void setTravels(ArrayList<Travel> travels);
+	
+	
+	
+	
 	
 	
 	
