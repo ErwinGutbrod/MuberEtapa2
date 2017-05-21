@@ -63,7 +63,7 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
-	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
+	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json",consumes = "application/json", headers = "Accept=application/json")
 	public String getNewPassenger(
 			@RequestParam(value="ID_USER", required = true) String ID_USER,
 			@RequestParam(value="name", required = true) String name,
