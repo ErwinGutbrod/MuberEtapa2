@@ -1,6 +1,7 @@
 package bd2.Muber.model;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Travel {
@@ -10,7 +11,7 @@ public class Travel {
 	private String destination;
 	private Calendar date;
 	private int passengerCount;
-	private long totalAmount;
+	private double totalAmount;
 	private boolean isFinalised = false;
 	private Driver driver;
 	private int idTravel;
@@ -19,6 +20,7 @@ public class Travel {
 	//Constructors
 	public Travel(){
 		super();
+		this.passengers = new HashSet<Passenger>();		
 	}
 	
 	
@@ -62,10 +64,10 @@ public class Travel {
 	public void setPassengerCount(int passengerCount) {
 		this.passengerCount = passengerCount;
 	}
-	public long getTotalAmount() {
+	public double getTotalAmount() {
 		return totalAmount;
 	}
-	public void setTotalAmount(long totalAmount) {
+	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 	public boolean getIsFinalised() {
