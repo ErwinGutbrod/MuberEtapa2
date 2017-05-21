@@ -94,8 +94,15 @@ public class Muber {
 		session.cancelQuery();
 	}
 
-	public ArrayList<Driver> getDrivers() {
-		return null;
+	public List<Driver> getDrivers() {
+		List<Driver> drivers = null;
+		try {
+			drivers = this.DAODriver.findAll(Driver.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return drivers;
 	}
 
 	public void setDrivers(ArrayList<Driver> drivers) {
@@ -115,8 +122,15 @@ public class Muber {
 	public void setPassengers(ArrayList<Passenger> passengers) {
 	}
 
-	public ArrayList<Travel> getTravels() {
-		return null;
+	public List<Travel> getOpenTravels() {
+		List<Travel> travels = null;
+		try {
+			travels = this.DAOTravel.getAllOpenTravels();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return travels;
 	}
 
 	public void setTravels(ArrayList<Travel> travels) {

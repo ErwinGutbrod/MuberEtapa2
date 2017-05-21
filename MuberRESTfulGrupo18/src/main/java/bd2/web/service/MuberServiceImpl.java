@@ -54,9 +54,8 @@ public class MuberServiceImpl implements MuberService{
 	}
 
 	@Override
-	public ArrayList<Driver> getDrivers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Driver> getDrivers() {
+		return muber.getDrivers();
 	}
 
 	@Override
@@ -77,9 +76,8 @@ public class MuberServiceImpl implements MuberService{
 	}
 
 	@Override
-	public ArrayList<Travel> getTravels() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Travel> getOpenTravels() {
+		return muber.getOpenTravels();
 	}
 
 	@Override
