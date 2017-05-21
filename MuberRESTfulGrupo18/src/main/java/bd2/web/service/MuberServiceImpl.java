@@ -48,12 +48,6 @@ public class MuberServiceImpl implements MuberService{
 	}
 
 	@Override
-	public void AddReviewTravel(Review review) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public List<Driver> getDrivers() {
 		return muber.getDrivers();
 	}
@@ -118,9 +112,15 @@ public class MuberServiceImpl implements MuberService{
 	}
 
 	@Override
-	public boolean idTravelFinaliced(int idTravel) {
+	public boolean isTravelFinaliced(int idTravel) throws Exception {
 		// TODO Auto-generated method stub
-		return false;
+		return muber.isTravelFinaliced(idTravel);
+	}
+
+	@Override
+	public void addReview(Review review) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

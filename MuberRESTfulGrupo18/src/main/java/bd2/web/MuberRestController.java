@@ -1,5 +1,6 @@
 package bd2.web;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 
 import bd2.Muber.model.Driver;
 import bd2.Muber.model.Passenger;
+import bd2.Muber.model.Review;
 import bd2.Muber.model.Travel;
 import bd2.web.service.MuberService;
 import mapping.AgregarPasajero;
@@ -119,12 +121,33 @@ public class MuberRestController {
 	
 	@RequestMapping(value = "/viajes/calificar", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 	public String rateToTravel(
-			@RequestParam(value="viajeId", required = true) String conductorId,
+			@RequestParam(value="viajeId", required = true) String viajeId,
 			@RequestParam(value="pasajeroId", required = true) String pasajeroId,
 			@RequestParam(value="puntaje", required = true) String puntaje,
-			@RequestParam(value="comentario", required = true) String comentario) {
+			@RequestParam(value="comentario", required = true) String comentario) throws NumberFormatException, Exception {
 		Map<String, Object> aMap = new HashMap<String, Object>();
-		aMap.put("result", "OK");
+		
+		if(muberService.isTravelFinaliced(Integer.parseInt(viajeId))){
+			Review aReview = new Review();
+			aReview.setRate(Integer.parseInt(puntaje));
+			aReview.setReview(comentario);		
+			
+			Passenger aPassenger = new Passenger();
+			aPassenger.setIdUser(Integer.parseInt(pasajeroId));
+				
+			Travel travel = new Travel();
+			travel.setIdTravel(Integer.parseInt(viajeId));
+			
+			aReview.setPassenger(aPassenger);
+			
+			muberService.addReview(aReview);
+			aMap.put("result", "OK");
+		}else{
+			aMap.put("result", "fail");
+		}
+		
+		
+
 		return new Gson().toJson(aMap);
 	}
 	

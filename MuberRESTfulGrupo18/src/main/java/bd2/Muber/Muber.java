@@ -75,10 +75,6 @@ public class Muber {
 	public void EndTravel(Travel travel) {
 		
 	}
-
-	public void AddReviewTravel(Review review) {
-		
-	}
 	
 	public void PersistObject (SessionFactory sf,Object o){
 		Session session = sf.getCurrentSession();
@@ -140,7 +136,13 @@ public class Muber {
 		return null;
 	}
 
-	public void setReviews(ArrayList<Review> reviews) {
+	public void addReviwe(Review reviews) {
+		try {
+			reviews = this.DAOReview.save(reviews);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Driver getDriver(int id){
@@ -152,6 +154,15 @@ public class Muber {
 			e.printStackTrace();
 		}
 		return driver;
+	}
+	
+	public boolean isTravelFinaliced(int id) throws Exception{
+		Travel travel = this.DAOTravel.get(Travel.class, id);
+		if (travel != null){
+			return travel.getIsFinalised();
+		}else{
+			return false;
+		}
 	}
 
 	
