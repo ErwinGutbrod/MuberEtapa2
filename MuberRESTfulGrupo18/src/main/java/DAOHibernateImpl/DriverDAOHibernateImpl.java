@@ -13,12 +13,4 @@ public class DriverDAOHibernateImpl extends GenericDAOHibernateImpl<Driver, Inte
 		return drivers;
 	}
 
-	@Override
-	public String getDriverInformation(Driver driver) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
 }

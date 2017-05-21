@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.google.gson.Gson;
 
+import bd2.Muber.model.Driver;
 import bd2.Muber.model.Passenger;
 import bd2.Muber.model.Travel;
 import bd2.web.service.MuberService;
@@ -68,13 +69,11 @@ public class MuberRestController {
 	
 	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json",consumes = "application/json", headers = "Accept=application/json")
 	public String getNewPassenger(
-			@RequestParam(value="ID_USER", required = true) String ID_USER,
 			@RequestParam(value="name", required = true) String name,
 			@RequestParam(value="password", required = true) String password,
 			@RequestParam(value="startDate", required = true) String startDate,
 			@RequestParam(value="credit", required = true) String credit) {
 		Passenger passenger = new Passenger();
-		passenger.setIdUser(Integer.parseInt(ID_USER));
 		passenger.setName(name);
 		passenger.setPassword(password);
 		passenger.setStartDate(Calendar.getInstance());
@@ -92,6 +91,19 @@ public class MuberRestController {
 			@RequestParam(value="conductorId", required = true) String conductorId,
 			@RequestParam(value="costoTotal", required = true) String costoTotal,
 			@RequestParam(value="cantidadPasajeros", required = true) String cantidadPasajeros) {
+		
+		Driver driver = new Driver();
+		driver.setIdUser(Integer.parseInt(conductorId));
+		Travel aTravel = new Travel();
+		
+		aTravel.setOrigin(origen);
+		aTravel.setDestination(destino);
+		aTravel.setDriver(driver);
+		aTravel.setTotalAmount(Double.parseDouble(costoTotal));
+		aTravel.setPassengerCount(Integer.parseInt(cantidadPasajeros));
+		
+		muberService.AddTravel(aTravel);
+		
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
 		return new Gson().toJson(aMap);

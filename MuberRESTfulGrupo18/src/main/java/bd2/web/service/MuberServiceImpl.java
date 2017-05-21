@@ -111,4 +111,16 @@ public class MuberServiceImpl implements MuberService{
 		}
 	}
 
+	@Override
+	public Driver getDriver(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean idTravelFinaliced(int idTravel) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
