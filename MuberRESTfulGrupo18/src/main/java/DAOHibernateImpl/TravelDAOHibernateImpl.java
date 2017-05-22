@@ -47,9 +47,18 @@ public class TravelDAOHibernateImpl extends GenericDAOHibernateImpl<Travel, Inte
 	}
 
 	@Override
-	public Travel endTravel(Travel travel) {
-		// TODO Auto-generated method stub
-		return null;
+	public Travel endTravel(Travel travel) throws Exception {
+		final Session session = sessionFactory.getCurrentSession();
+		final Transaction trans = session.beginTransaction();
+		String hqlUpdate = "update Travel c set c.isFinalised= :isFinalised where c.idTravel = :idTravel";
+		// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
+		int updatedEntities = session.createQuery( hqlUpdate )
+		        .setParameter( "isFinalised", true )
+		        .setParameter( "idTravel", travel.getIdTravel() )
+		        .executeUpdate();
+		trans.commit();
+		session.close();
+		return this.get(Travel.class, travel.getIdTravel());
 	}
 
 	

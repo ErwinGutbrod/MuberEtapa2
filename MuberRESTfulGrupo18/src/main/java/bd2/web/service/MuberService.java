@@ -25,7 +25,7 @@ public interface MuberService {
 	public boolean idTravelFinaliced(int idTravel);
 	
 	//Review
-	public void AddReviewTravel(Review review);
+	public void addReview(Review review);
 	public ArrayList<Review> getReviews();
 	public void setReviews(ArrayList<Review> reviews);
 	public List<Review> getReviewsFromDriver(Driver driver);

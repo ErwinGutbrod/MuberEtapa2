@@ -15,12 +15,11 @@ public class Travel {
 	private boolean isFinalised = false;
 	private Driver driver;
 	private int idTravel;
-	private Set<Passenger> passengers;
+	private Set<Passenger> passengers =  new HashSet<Passenger>();
 	
 	//Constructors
 	public Travel(){
 		super();
-		this.passengers = new HashSet<Passenger>();		
 	}
 	
 	
