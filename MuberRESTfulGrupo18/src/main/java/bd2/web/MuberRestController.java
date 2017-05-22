@@ -88,53 +88,53 @@ public class MuberRestController {
 	}
 
 	///////****************************************************************
-//	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json",consumes = "application/json", headers = "Accept=application/json")
-//	public String getNewPassenger(
-//			@RequestParam(value="name", required = true) String name,
-//			@RequestParam(value="password", required = true) String password,
-//			@RequestParam(value="startDate", required = true) String startDate,
-//			@RequestParam(value="credit", required = true) String credit) {
-//		Passenger passenger = new Passenger();
-//		passenger.setName(name);
-//		passenger.setPassword(password);
-//		passenger.setStartDate(Calendar.getInstance());
-//		passenger.setCredit(Double.parseDouble(credit));
-//		muberService.AddPassenger(passenger);
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//		aMap.put("result", "OK");
-//		return new Gson().toJson(aMap);
-//	}
-//	
+	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
+	public String getNewPassenger(
+			@RequestParam(value="name", required = true) String name,
+			@RequestParam(value="password", required = true) String password,
+			@RequestParam(value="credit", required = true) String credit) {
+		Passenger passenger = new Passenger();
+		passenger.setName(name);
+		passenger.setPassword(password);
+		passenger.setStartDate(Calendar.getInstance());
+		passenger.setCredit(Double.parseDouble(credit));
+		muberService.AddPassenger(passenger);
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK");
+		return new Gson().toJson(aMap);
+	}
+	
 
 ///////****************************************************************
 
-//	@RequestMapping(value = "/viajes/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
-//	public String getNewTravel(
-//			@RequestParam(value="origen", required = true) String origen,
-//			@RequestParam(value="destino", required = true) String destino,
-//			@RequestParam(value="conductorId", required = true) String conductorId,
-//			@RequestParam(value="costoTotal", required = true) String costoTotal,
-//			@RequestParam(value="cantidadPasajeros", required = true) String cantidadPasajeros) {
-//		
-//		Driver driver = new Driver();
-//		driver.setIdUser(Integer.parseInt(conductorId));
-//		Travel aTravel = new Travel();
-//		
-//		aTravel.setOrigin(origen);
-//		aTravel.setDestination(destino);
-//		aTravel.setDriver(driver);
-//		aTravel.setTotalAmount(Double.parseDouble(costoTotal));
-//		aTravel.setPassengerCount(Integer.parseInt(cantidadPasajeros));
-//		
-//		muberService.AddTravel(aTravel);
-//		
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//		aMap.put("result", "OK");
-//		return new Gson().toJson(aMap);
-//	}
+	@RequestMapping(value = "/viajes/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
+	public String getNewTravel(
+			@RequestParam(value="origen", required = true) String origen,
+			@RequestParam(value="destino", required = true) String destino,
+			@RequestParam(value="conductorId", required = true) String conductorId,
+			@RequestParam(value="costoTotal", required = true) String costoTotal,
+			@RequestParam(value="cantidadPasajeros", required = true) String cantidadPasajeros) {
+		
+		Driver driver = muberService.getDriver(Integer.parseInt(conductorId));
+	
+		Travel aTravel = new Travel();
+		
+		aTravel.setOrigin(origen);
+		aTravel.setDestination(destino);
+		aTravel.setDriver(driver);
+		aTravel.setDate(Calendar.getInstance());
+		aTravel.setTotalAmount(Double.parseDouble(costoTotal));
+		aTravel.setPassengerCount(Integer.parseInt(cantidadPasajeros));
+		
+		muberService.AddTravel(aTravel);
+		
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK");
+		return new Gson().toJson(aMap);
+	}
 //
 
-	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
 	public @ResponseBody String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		aMap.put("result", "OK");
