@@ -171,7 +171,6 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
-	// *************************************** Cambiar PUTpor POST y despues volver a cambiar
 	@RequestMapping(value = "/pasajeros/cargarCredito", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
 	public String insertCredit(@RequestBody CargarCredito cargarCredito) {
 				
@@ -191,18 +190,19 @@ public class MuberRestController {
 //		
 	
 	
-// ****************
-//	@RequestMapping(value = "/viajes/finalizar", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
-//	public @ResponseBody String finishTravel(@RequestBody String viajeId) {
-//		// Corroborarar que se finalice una vez
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//		Travel travel = new Travel();
-//		travel.setIdTravel(Integer.parseInt(viajeId));
-//		muberService.endTravel(travel);
-//		
-//		aMap.put("result", "OK");
-//		return new Gson().toJson(aMap);
-//	}		
+// **************** Falta probar
+	@RequestMapping(value = "/viajes/finalizar", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
+	public @ResponseBody String finishTravel(@RequestBody String viajeId) {
+		// Corroborarar que se finalice una vez
+		Map<String, Object> aMap = new HashMap<String, Object>();
+
+		Travel travel = muberService.getTravel(Integer.parseInt(viajeId));
+
+		muberService.endTravel(travel);
+		
+		aMap.put("result", "OK");
+		return new Gson().toJson(aMap);
+	}		
 //	
 //	@RequestMapping(value = "/conductores/top10", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
 //	public String topTenOfDrivers() {

@@ -24,7 +24,6 @@ public interface MuberService {
 	public List<Travel> getTravelsFromDriver(Driver driver);
 	public void endTravel(Travel travel);
 	public boolean idTravelFinaliced(int idTravel) throws Exception;
-	
 	//Review
 	public void addReview(Review review);
 	public ArrayList<Review> getReviews();
