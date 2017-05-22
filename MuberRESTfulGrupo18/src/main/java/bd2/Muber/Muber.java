@@ -79,9 +79,14 @@ public class Muber {
 		}
 	}
 
-	public void AddPassengerToTravel(Travel travel, Passenger passenger1) throws Exception {
+	public void AddPassengerToTravel(Travel travel, Passenger passenger1) {
 		travel.getPassengers().add(passenger1);
-		this.DAOTravel.save(travel);
+		try {
+			this.DAOTravel.saveOrUpdate(travel);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Passenger getPassenger(int idPassenger){

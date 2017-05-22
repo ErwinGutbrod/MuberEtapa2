@@ -130,7 +130,6 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 
-// probar 
 	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
 	public @ResponseBody String addPassengerInTravel(@RequestBody AgregarPasajero agregarPasajero) {
 		Map<String, Object> aMap = new HashMap<String, Object>();
@@ -139,8 +138,14 @@ public class MuberRestController {
 		Travel travel = muberService.getTravel(agregarPasajero.getViajeId());
 
 		if (aPassenger != null && travel !=null){
-			this.muberService.AddPassengerToTravel(travel, aPassenger);
-			aMap.put("result", "OK");
+			if(!travel.getIsFinalised()){
+				this.muberService.AddPassengerToTravel(travel, aPassenger);
+				aMap.put("result", "OK");
+			}else{
+				aMap.put("result", "Travel has finished");
+
+			}
+			
 		}else{
 			aMap.put("result", "fail");
 
