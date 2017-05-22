@@ -17,6 +17,7 @@ public interface MuberService {
 	public void setDrivers(ArrayList<Driver> drivers);
 	//Travel
 	public void AddTravel(Travel travel);
+	public Travel getTravel(int id);
 	public List<Travel> getOpenTravels();
 	public void AddPassenger(Passenger passenger);
 	public void AddPassengerToTravel(Travel travel, Passenger passenger1);

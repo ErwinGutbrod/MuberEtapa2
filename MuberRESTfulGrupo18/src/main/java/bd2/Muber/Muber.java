@@ -58,6 +58,17 @@ public class Muber {
 			e.printStackTrace();
 		}
 	}
+	
+	public Travel getTravel(int idTravel){
+		Travel aTravel = new Travel();
+		try {
+			aTravel = this.DAOTravel.get(Travel.class, idTravel);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return aTravel;
+	}
 
 	public void AddPassenger(Passenger passenger) {
 		try {

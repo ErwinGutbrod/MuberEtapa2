@@ -135,4 +135,9 @@ public class MuberServiceImpl implements MuberService{
 		return this.muber.updatePassenger(aPassenger);
 	}
 
+	@Override
+	public Travel getTravel(int idTravel) {
+		return this.muber.getTravel(idTravel);
+	}
+
 }

@@ -154,12 +154,10 @@ public class MuberRestController {
 			aReview.setRate(Integer.parseInt(puntaje));
 			aReview.setReview(comentario);		
 			
-			Passenger aPassenger = new Passenger();
-			aPassenger.setIdUser(Integer.parseInt(pasajeroId));
+			Passenger aPassenger = muberService.getPassenger(Integer.parseInt(pasajeroId));
 				
-			Travel travel = new Travel();
-			travel.setIdTravel(Integer.parseInt(viajeId));
-			
+			Travel travel = muberService.getTravel(Integer.parseInt(viajeId));
+			aReview.setTravel(travel);
 			aReview.setPassenger(aPassenger);
 			
 			muberService.addReview(aReview);
