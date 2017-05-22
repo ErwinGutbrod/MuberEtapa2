@@ -179,7 +179,7 @@ public class Muber {
 
 	public void addReviwe(Review reviews) {
 		try {
-			reviews = this.DAOReview.save(reviews);
+			this.DAOReview.save(reviews);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
