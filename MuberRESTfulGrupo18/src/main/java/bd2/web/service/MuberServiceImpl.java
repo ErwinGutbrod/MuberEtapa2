@@ -98,11 +98,11 @@ public class MuberServiceImpl implements MuberService{
 		return null;
 	}
 
-	@Override
-	public boolean isTravelFinaliced(int idTravel) throws Exception {
-		// TODO Auto-generated method stub
-		return muber.isTravelFinaliced(idTravel);
-	}
+//	@Override
+//	public boolean idTravelFinaliced(int idTravel) {
+//		// TODO Auto-generated method stub
+//		return muber.isTravelFinaliced(idTravel);
+//	}
 
 	@Override
 	public void addReview(Review review) {
@@ -120,10 +120,16 @@ public class MuberServiceImpl implements MuberService{
 		return muber.getReviewsFromDriver(driver);
 	}
 
+//	@Override
+//	public void AddReviewTravel(Review review) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
 	@Override
-	public void AddReviewTravel(Review review) {
+	public boolean idTravelFinaliced(int idTravel) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 }

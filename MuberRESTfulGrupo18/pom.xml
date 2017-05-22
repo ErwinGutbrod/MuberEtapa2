@@ -107,7 +107,6 @@
   </dependencies>
 
   <build>
-    <testSourceDirectory>src/main/tests</testSourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
