@@ -2,6 +2,7 @@ package bd2.Muber;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -112,6 +113,15 @@ public class Muber {
 	public void endTravel(Travel travel) {
 		try {
 			this.DAOTravel.endTravel(travel);
+			Set<Passenger> passengers = travel.getPassengers();
+
+			double amount = travel.getTotalAmount() / passengers.size();
+			
+			for (Passenger p : passengers) {
+				p.setCredit(amount * -1);
+			    this.updatePassenger(p);
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

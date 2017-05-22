@@ -218,13 +218,14 @@ public class MuberRestController {
 
 		return new Gson().toJson(aMap);
 	}		
-//	
-//	@RequestMapping(value = "/conductores/top10", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
-//	public String topTenOfDrivers() {
-//		// Listar los 10 conductores mejor calificados que no tengan viajes abiertos registrad
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//		aMap.put("result", "OK"); 
-//		return new Gson().toJson(aMap);
-//	}	
+
+	
+	@RequestMapping(value = "/conductores/top10", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
+	public String topTenOfDrivers() {
+		// Listar los 10 conductores mejor calificados que no tengan viajes abiertos registrad
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK"); 
+		return new Gson().toJson(aMap);
+	}	
 }
 
