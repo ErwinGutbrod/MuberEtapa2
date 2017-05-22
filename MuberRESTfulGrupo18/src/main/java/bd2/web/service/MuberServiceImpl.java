@@ -94,8 +94,7 @@ public class MuberServiceImpl implements MuberService{
 	
 	@Override
 	public Driver getDriver(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return muber.getDriver(id);
 	}
 
 //	@Override

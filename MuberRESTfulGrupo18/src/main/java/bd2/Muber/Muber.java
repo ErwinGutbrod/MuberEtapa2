@@ -72,6 +72,17 @@ public class Muber {
 
 	}
 
+	public Passenger getPassenger(int idPassenger){
+		Passenger aPassenger = new Passenger();
+		try {
+			aPassenger = this.DAOPassenger.get(Passenger.class, idPassenger);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return aPassenger;
+	}
+	
 	public void endTravel(Travel travel) {
 		try {
 			this.DAOTravel.endTravel(travel);
