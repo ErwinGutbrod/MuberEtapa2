@@ -1,6 +1,5 @@
 package bd2.web.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import bd2.Muber.model.Driver;
@@ -19,17 +18,17 @@ public interface MuberService {
 	//Travel
 	public void AddTravel(Travel travel);
 	public Travel getTravel(int id);
-	public List<Travel> getOpenTravels();
-	public void AddPassenger(Passenger passenger);
+	public List<Travel> getOpenTravels();	
 	public void AddPassengerToTravel(Travel travel, Passenger passenger1);
 	public List<Travel> getTravelsFromDriver(Driver driver);
 	public void endTravel(Travel travel);
-	public boolean idTravelFinaliced(int idTravel) throws Exception;
+	public boolean isTravelFinalized(int idTravel) throws Exception;
 	//Review
 	public void addReview(Review review);
 	public List<Review> getReviewsFromDriver(Driver driver);
 	
 	//Passengers
+	public void AddPassenger(Passenger passenger);
 	public List<Passenger> getPassengers();
 	public Passenger getPassenger(int idPassenger);
 	public boolean updatePassenger(Passenger aPassenger);

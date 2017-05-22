@@ -35,18 +35,6 @@ public class TravelDAOHibernateImpl extends GenericDAOHibernateImpl<Travel, Inte
 	}
 
 	@Override
-	public Travel createTravel() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Travel addPassengerToTravel(Travel travel, Passenger passenger) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Travel endTravel(Travel travel) throws Exception {
 		final Session session = sessionFactory.getCurrentSession();
 		final Transaction trans = session.beginTransaction();

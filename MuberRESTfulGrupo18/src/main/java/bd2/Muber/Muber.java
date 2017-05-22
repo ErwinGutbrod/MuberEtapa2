@@ -1,13 +1,9 @@
 package bd2.Muber;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import DAO.DriverDAO;
 import DAO.PassengerDAO;
@@ -42,14 +38,96 @@ public class Muber {
 	}
 	
 	//Methods
+	//Driver
 	public void AddDriver(Driver driver) {
 		try {
 			this.DAODriver.save(driver);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Driver getDriver(int id){
+		Driver driver = null;
+		try {
+			driver = this.DAODriver.get(Driver.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return driver;
+	}
+	
+	public List<Driver> getDrivers() {
+		List<Driver> drivers = null;
+		try {
+			drivers = this.DAODriver.findAll(Driver.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return drivers;
+	}
+	
+	public List<Driver> getTop10Drivers() {
+		List<Driver> drivers = null;
+		try {
+			drivers = this.DAODriver.getTop10Drivers();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return drivers;
+	}
+	
+	
+	//Passenger
+	
+	public void AddPassenger(Passenger passenger) {
+		try {
+			this.DAOPassenger.save(passenger);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public Passenger getPassenger(int idPassenger){
+		Passenger aPassenger = new Passenger();
+		try {
+			aPassenger = this.DAOPassenger.get(Passenger.class, idPassenger);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return aPassenger;
+	}
+	
+	public boolean updatePassenger(Passenger aPassenger){
+		try {
+				Passenger passenger = this.getPassenger(aPassenger.getIdUser());
+				if (passenger != null){
+					passenger.setCredit(passenger.getCredit() + aPassenger.getCredit());
+					this.DAOPassenger.saveOrUpdate(passenger);
+					return true;
+				}
+			} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public List<Passenger> getPassengers() {
+		List<Passenger> passengers = null;
+		try {
+			passengers = this.DAOPassenger.findAll(Passenger.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return passengers;
+	}
+	
+	//Travel
 
 	public void AddTravel(Travel travel) {
 		try {
@@ -71,15 +149,6 @@ public class Muber {
 		return aTravel;
 	}
 
-	public void AddPassenger(Passenger passenger) {
-		try {
-			this.DAOPassenger.save(passenger);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public void AddPassengerToTravel(Travel travel, Passenger passenger1) {
 		travel.getPassengers().add(passenger1);
 		try {
@@ -88,31 +157,6 @@ public class Muber {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public Passenger getPassenger(int idPassenger){
-		Passenger aPassenger = new Passenger();
-		try {
-			aPassenger = this.DAOPassenger.get(Passenger.class, idPassenger);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return aPassenger;
-	}
-	public boolean updatePassenger(Passenger aPassenger){
-		try {
-				Passenger passenger = this.getPassenger(aPassenger.getIdUser());
-				if (passenger != null){
-					passenger.setCredit(passenger.getCredit() + aPassenger.getCredit());
-					this.DAOPassenger.saveOrUpdate(passenger);
-					return true;
-				}
-			} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
 	}
 	
 	public void endTravel(Travel travel) {
@@ -133,59 +177,6 @@ public class Muber {
 		}
 	}
 	
-	public void PersistObject (SessionFactory sf,Object o){
-		Session session = sf.getCurrentSession();
-		try{
-			session.beginTransaction();
-			session.save(o);
-			session.getTransaction().commit();
-		}
-		catch (HibernateException e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		session.cancelQuery();
-	}
-
-	public List<Driver> getDrivers() {
-		List<Driver> drivers = null;
-		try {
-			drivers = this.DAODriver.findAll(Driver.class);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return drivers;
-	}
-	
-	public List<Driver> getTop10Drivers() {
-		List<Driver> drivers = null;
-		try {
-			drivers = this.DAODriver.getTop10Drivers();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return drivers;
-	}
-
-	public void setDrivers(ArrayList<Driver> drivers) {
-	}
-
-	public List<Passenger> getPassengers() {
-		List<Passenger> passengers = null;
-		try {
-			passengers = this.DAOPassenger.findAll(Passenger.class);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return passengers;
-	}
-
-	public void setPassengers(ArrayList<Passenger> passengers) {
-	}
-
 	public List<Travel> getOpenTravels() {
 		List<Travel> travels = null;
 		try {
@@ -195,33 +186,6 @@ public class Muber {
 			e.printStackTrace();
 		}
 		return travels;
-	}
-
-	public void setTravels(ArrayList<Travel> travels) {
-	}
-
-	public ArrayList<Review> getReviews() {
-		return null;
-	}
-
-	public void addReviwe(Review reviews) {
-		try {
-			this.DAOReview.save(reviews);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public Driver getDriver(int id){
-		Driver driver = null;
-		try {
-			driver = this.DAODriver.get(Driver.class, id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return driver;
 	}
 	
 	public List<Travel> getTravelsFromDriver(Driver driver){
@@ -235,6 +199,26 @@ public class Muber {
 		return travels;
 	}
 	
+	public boolean isTravelFinalized(int id) throws Exception{
+		Travel travel = this.DAOTravel.get(Travel.class, id);
+				if (travel != null){
+						return travel.getIsFinalised();
+					}else{
+						return false;
+					}
+		}
+	
+	//Review
+
+	public void addReview(Review review) {
+		try {
+			this.DAOReview.save(review);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
+	
 	public List<Review> getReviewsFromDriver(Driver driver){
 		List<Review> reviews = null;
 		try {
@@ -246,14 +230,7 @@ public class Muber {
 		return reviews;
 	}
 
-	public boolean isTravelFinaliced(int id) throws Exception{
-		Travel travel = this.DAOTravel.get(Travel.class, id);
-				if (travel != null){
-						return travel.getIsFinalised();
-					}else{
-						return false;
-					}
-		}
+
 	
 	
 }

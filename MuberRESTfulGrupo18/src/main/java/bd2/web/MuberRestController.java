@@ -1,6 +1,5 @@
 package bd2.web;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -34,7 +33,10 @@ import mapping.FinalizarViaje;
 public class MuberRestController {
 
 	@Autowired
-	MuberService muberService;  
+	MuberService muberService;
+	
+	//Services 
+	//Pasajeros
 	
 	@RequestMapping(value = "/pasajeros", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
 	public String getPassengers() {
@@ -46,6 +48,40 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
+	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
+	public String getNewPassenger(
+			@RequestParam(value="name", required = true) String name,
+			@RequestParam(value="password", required = true) String password,
+			@RequestParam(value="credit", required = true) String credit) {
+		Passenger passenger = new Passenger();
+		passenger.setName(name);
+		passenger.setPassword(password);
+		passenger.setStartDate(Calendar.getInstance());
+		passenger.setCredit(Double.parseDouble(credit));
+		muberService.AddPassenger(passenger);
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK");
+		return new Gson().toJson(aMap);
+	}
+	
+	@RequestMapping(value = "/pasajeros/cargarCredito", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
+	public String insertCredit(@RequestBody CargarCredito cargarCredito) {
+				
+		Passenger aPassenger = new Passenger();
+		aPassenger.setIdUser(cargarCredito.getPasajeroId());
+		aPassenger.setCredit(cargarCredito.getMonto());
+		
+		Map<String, Object> aMap = new HashMap<String, Object>();
+
+		if (this.muberService.updatePassenger(aPassenger)){
+			aMap.put("result", "OK");
+		}else{
+			aMap.put("result", "fail");
+		}
+		return new Gson().toJson(aMap);
+	}	
+	//Conductores
+	
 	@RequestMapping(value = "/conductores", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
 	public String getDrivers() {
 		Map<String, Object> aMap = new HashMap<String, Object>();
@@ -54,15 +90,6 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
-	@RequestMapping(value = "/viajes/abiertos", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
-	public String getTravelOpened() {
-		Map<String, Object> aMap = new HashMap<String, Object>();
-		aMap.put("result", "OK");
-		aMap.put("viajes", muberService.getOpenTravels());
-		return new Gson().toJson(aMap);
-	}
-	
-
 	@RequestMapping(value = "/conductores/detalle", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
 	public String getDriverDetail(
 			@RequestParam(value="conductorId", required = true) String conductorId) {
@@ -87,23 +114,24 @@ public class MuberRestController {
 		aMap.put("licenseExpiration", driver.getLicenseExpirationDate());
 		return new Gson().toJson(aMap);
 	}
-
-	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
-	public String getNewPassenger(
-			@RequestParam(value="name", required = true) String name,
-			@RequestParam(value="password", required = true) String password,
-			@RequestParam(value="credit", required = true) String credit) {
-		Passenger passenger = new Passenger();
-		passenger.setName(name);
-		passenger.setPassword(password);
-		passenger.setStartDate(Calendar.getInstance());
-		passenger.setCredit(Double.parseDouble(credit));
-		muberService.AddPassenger(passenger);
+	
+	@RequestMapping(value = "/conductores/top10", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
+	public String topTenOfDrivers() {
+		// Listar los 10 conductores mejor calificados que no tengan viajes abiertos registrad
 		Map<String, Object> aMap = new HashMap<String, Object>();
-		aMap.put("result", "OK");
+		aMap.put("result", "OK"); 
+		aMap.put("top10conductores", muberService.getTop10Drivers());
 		return new Gson().toJson(aMap);
 	}
 	
+	//Viajes
+	@RequestMapping(value = "/viajes/abiertos", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
+	public String getTravelOpened() {
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK");
+		aMap.put("viajes", muberService.getOpenTravels());
+		return new Gson().toJson(aMap);
+	}	
 
 	@RequestMapping(value = "/viajes/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 	public String getNewTravel(
@@ -155,9 +183,6 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
-
-	
-	///////****************************************************************
 	@RequestMapping(value = "/viajes/calificar", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 	public String rateToTravel(
 			@RequestParam(value="viajeId", required = true) String viajeId,
@@ -166,7 +191,7 @@ public class MuberRestController {
 			@RequestParam(value="comentario", required = true) String comentario) throws NumberFormatException, Exception {
 		Map<String, Object> aMap = new HashMap<String, Object>();
 		
-		if(muberService.idTravelFinaliced(Integer.parseInt(viajeId))){
+		if(muberService.isTravelFinalized(Integer.parseInt(viajeId))){
 			Review aReview = new Review();
 			aReview.setRate(Integer.parseInt(puntaje));
 			aReview.setReview(comentario);		
@@ -186,25 +211,7 @@ public class MuberRestController {
 		
 
 		return new Gson().toJson(aMap);
-	}
-	
-	@RequestMapping(value = "/pasajeros/cargarCredito", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
-	public String insertCredit(@RequestBody CargarCredito cargarCredito) {
-				
-		Passenger aPassenger = new Passenger();
-		aPassenger.setIdUser(cargarCredito.getPasajeroId());
-		aPassenger.setCredit(cargarCredito.getMonto());
-		
-		Map<String, Object> aMap = new HashMap<String, Object>();
-
-		if (this.muberService.updatePassenger(aPassenger)){
-			aMap.put("result", "OK");
-		}else{
-			aMap.put("result", "fail");
-		}
-		return new Gson().toJson(aMap);
 	}	
-	
 	
 	@RequestMapping(value = "/viajes/finalizar", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
 	public @ResponseBody String finishTravel(@RequestBody FinalizarViaje finalizarViaje) throws NumberFormatException, Exception {
@@ -213,7 +220,7 @@ public class MuberRestController {
 
 		Travel travel = muberService.getTravel(finalizarViaje.getViajeId());
 
-		if(!muberService.idTravelFinaliced(finalizarViaje.getViajeId())){
+		if(!muberService.isTravelFinalized(finalizarViaje.getViajeId())){
 			muberService.endTravel(travel);
 			aMap.put("result", "OK");
 		}else{
@@ -224,13 +231,6 @@ public class MuberRestController {
 	}		
 
 	
-	@RequestMapping(value = "/conductores/top10", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
-	public String topTenOfDrivers() {
-		// Listar los 10 conductores mejor calificados que no tengan viajes abiertos registrad
-		Map<String, Object> aMap = new HashMap<String, Object>();
-		aMap.put("result", "OK"); 
-		aMap.put("top10conductores", muberService.getTop10Drivers());
-		return new Gson().toJson(aMap);
-	}	
+	
 }
 

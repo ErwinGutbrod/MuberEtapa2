@@ -9,8 +9,8 @@ public class PassengerDAOHibernateImpl extends GenericDAOHibernateImpl<Passenger
 
 	@Override
 	public List<Passenger> getAllPassengers() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Passenger> passengers = this.findAll(Passenger.class);
+		return passengers;
 	}
 
 	

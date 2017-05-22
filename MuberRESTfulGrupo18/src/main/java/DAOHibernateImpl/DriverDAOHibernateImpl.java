@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 
 import DAO.DriverDAO;
 import bd2.Muber.model.Driver;
-import bd2.Muber.model.Review;
 
 public class DriverDAOHibernateImpl extends GenericDAOHibernateImpl<Driver, Integer> implements DriverDAO {
 
