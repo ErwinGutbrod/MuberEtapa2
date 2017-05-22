@@ -87,7 +87,6 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 
-	///////****************************************************************
 	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 	public String getNewPassenger(
 			@RequestParam(value="name", required = true) String name,
@@ -104,8 +103,6 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
-
-///////****************************************************************
 
 	@RequestMapping(value = "/viajes/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 	public String getNewTravel(
@@ -144,38 +141,38 @@ public class MuberRestController {
 
 	
 	///////****************************************************************
-//	@RequestMapping(value = "/viajes/calificar", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
-//	public String rateToTravel(
-//			@RequestParam(value="viajeId", required = true) String viajeId,
-//			@RequestParam(value="pasajeroId", required = true) String pasajeroId,
-//			@RequestParam(value="puntaje", required = true) String puntaje,
-//			@RequestParam(value="comentario", required = true) String comentario) throws NumberFormatException, Exception {
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//		
-//		if(muberService.idTravelFinaliced(Integer.parseInt(viajeId))){
-//			Review aReview = new Review();
-//			aReview.setRate(Integer.parseInt(puntaje));
-//			aReview.setReview(comentario);		
-//			
-//			Passenger aPassenger = new Passenger();
-//			aPassenger.setIdUser(Integer.parseInt(pasajeroId));
-//				
-//			Travel travel = new Travel();
-//			travel.setIdTravel(Integer.parseInt(viajeId));
-//			
-//			aReview.setPassenger(aPassenger);
-//			
-//			muberService.addReview(aReview);
-//			aMap.put("result", "OK");
-//		}else{
-//			aMap.put("result", "fail");
-//		}
-//		
-//		
-//
-//		return new Gson().toJson(aMap);
-//	}
-//	
+	@RequestMapping(value = "/viajes/calificar", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
+	public String rateToTravel(
+			@RequestParam(value="viajeId", required = true) String viajeId,
+			@RequestParam(value="pasajeroId", required = true) String pasajeroId,
+			@RequestParam(value="puntaje", required = true) String puntaje,
+			@RequestParam(value="comentario", required = true) String comentario) throws NumberFormatException, Exception {
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		
+		if(muberService.idTravelFinaliced(Integer.parseInt(viajeId))){
+			Review aReview = new Review();
+			aReview.setRate(Integer.parseInt(puntaje));
+			aReview.setReview(comentario);		
+			
+			Passenger aPassenger = new Passenger();
+			aPassenger.setIdUser(Integer.parseInt(pasajeroId));
+				
+			Travel travel = new Travel();
+			travel.setIdTravel(Integer.parseInt(viajeId));
+			
+			aReview.setPassenger(aPassenger);
+			
+			muberService.addReview(aReview);
+			aMap.put("result", "OK");
+		}else{
+			aMap.put("result", "fail");
+		}
+		
+		
+
+		return new Gson().toJson(aMap);
+	}
+	
 	// *************************************** Cambiar PUTpor POST y despues volver a cambiar
 //	@RequestMapping(value = "/pasajeros/cargarCredito", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
 //	public @ResponseBody String insertCredit(@RequestBody CargarCredito cargarCredito) {

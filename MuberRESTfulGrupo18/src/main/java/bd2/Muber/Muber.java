@@ -86,7 +86,7 @@ public class Muber {
 		try {
 				Passenger passenger = this.getPassenger(aPassenger.getIdUser());
 				if (passenger != null){
-					passenger.setCredit(aPassenger.getCredit());
+					passenger.setCredit(passenger.getCredit() + aPassenger.getCredit());
 					this.DAOPassenger.saveOrUpdate(passenger);
 					return true;
 				}
@@ -208,5 +208,14 @@ public class Muber {
 		return reviews;
 	}
 
+	public boolean isTravelFinaliced(int id) throws Exception{
+		Travel travel = this.DAOTravel.get(Travel.class, id);
+				if (travel != null){
+						return travel.getIsFinalised();
+					}else{
+						return false;
+					}
+		}
+	
 	
 }
