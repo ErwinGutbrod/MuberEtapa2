@@ -14,7 +14,7 @@ public interface MuberService {
 	public void AddDriver(Driver driver);
 	public Driver getDriver(int id);
 	public List<Driver> getDrivers();
-	public void setDrivers(ArrayList<Driver> drivers);
+	
 	//Travel
 	public void AddTravel(Travel travel);
 	public Travel getTravel(int id);
@@ -26,14 +26,10 @@ public interface MuberService {
 	public boolean idTravelFinaliced(int idTravel) throws Exception;
 	//Review
 	public void addReview(Review review);
-	public ArrayList<Review> getReviews();
-	public void setReviews(ArrayList<Review> reviews);
 	public List<Review> getReviewsFromDriver(Driver driver);
 	
 	//Passengers
 	public List<Passenger> getPassengers();
-	public void setPassengers(ArrayList<Passenger> passengers);	
-	public void setTravels(ArrayList<Travel> travels);
 	public Passenger getPassenger(int idPassenger);
 	public boolean updatePassenger(Passenger aPassenger);
 	
