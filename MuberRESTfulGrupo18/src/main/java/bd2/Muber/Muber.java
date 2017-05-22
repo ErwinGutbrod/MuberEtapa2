@@ -157,6 +157,17 @@ public class Muber {
 		}
 		return drivers;
 	}
+	
+	public List<Driver> getTop10Drivers() {
+		List<Driver> drivers = null;
+		try {
+			drivers = this.DAODriver.getTop10Drivers();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return drivers;
+	}
 
 	public void setDrivers(ArrayList<Driver> drivers) {
 	}

@@ -14,6 +14,7 @@ public interface MuberService {
 	public void AddDriver(Driver driver);
 	public Driver getDriver(int id);
 	public List<Driver> getDrivers();
+	public List<Driver> getTop10Drivers();
 	
 	//Travel
 	public void AddTravel(Travel travel);

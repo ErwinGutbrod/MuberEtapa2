@@ -101,4 +101,9 @@ public class MuberServiceImpl implements MuberService{
 		return this.muber.getTravel(idTravel);
 	}
 
+	@Override
+	public List<Driver> getTop10Drivers() {
+		return muber.getTop10Drivers();
+	}
+
 }
