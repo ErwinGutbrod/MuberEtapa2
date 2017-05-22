@@ -28,6 +28,7 @@ public class ReviewDAOHibernateImpl extends GenericDAOHibernateImpl<Review, Inte
 		final Transaction trans = session.beginTransaction();
 		String query = "SELECT r.* FROM Review r INNER JOIN Travel t ON r.ID_TRAVEL = t.ID_TRAVEL WHERE t.ID_USER =" + driver.getIdUser();
 		final SQLQuery sqlQuery = session.createSQLQuery(query);
+		sqlQuery.addEntity("r", Review.class);
 	    List<Review> list = (List<Review>) sqlQuery.list();
 	    trans.commit();
 	    return list;

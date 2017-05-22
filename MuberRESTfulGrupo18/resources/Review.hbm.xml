@@ -12,8 +12,8 @@
 	<property name="rate"  column="RATE"/>
 	<property name="review"  column="REVIEW"/>
 	
-	<many-to-one name="passenger" class="Passenger" column="ID_USER"  not-null="true" cascade="all" />
-	<many-to-one name="travel" class="Travel" column="ID_TRAVEL"  not-null="true" cascade="all" />
+	<many-to-one name="passenger" class="Passenger" column="ID_USER" lazy="false"  not-null="true" cascade="all" />
+	<many-to-one name="travel" class="Travel" column="ID_TRAVEL" lazy="false"  not-null="true" cascade="all" />
 
 </class>
 </hibernate-mapping>

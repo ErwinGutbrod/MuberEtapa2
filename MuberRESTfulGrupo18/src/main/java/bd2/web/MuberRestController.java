@@ -60,30 +60,30 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
-//	@RequestMapping(value = "/conductores/detalle", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
-//	public String getDriverDetail(
-//			@RequestParam(value="conductorId", required = true) String conductorId) {
-//		Driver driver = muberService.getDriver(Integer.parseInt(conductorId));
-//		List<Travel> driverTravels = muberService.getTravelsFromDriver(driver);
-//		List<Review> driverReviews = muberService.getReviewsFromDriver(driver);
-//		int scoreSum = 0;
-//		int scoreCount = 0;
-//		double averageScore = 0;
-//		for (Iterator<Review> i = driverReviews.iterator(); i.hasNext();) {
-//		    Review item = i.next();
-//		    scoreSum+=item.getRate();
-//		    scoreCount++;
-//		}
-//		averageScore = scoreSum/scoreCount;
-//		// Obtener  la  información  de  un  conductor  (nombre  de  usuario, viajes  realizados,  puntaje promedio y fecha de licencia
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//		aMap.put("result", "OK");
-//		aMap.put("userName", driver.getName());
-//		aMap.put("driverTravels", driverTravels);
-//		aMap.put("averageScore", averageScore);
-//		aMap.put("licenseExpiration", driver.getLicenseExpirationDate());
-//		return new Gson().toJson(aMap);
-//	}
+	@RequestMapping(value = "/conductores/detalle", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
+	public String getDriverDetail(
+			@RequestParam(value="conductorId", required = true) String conductorId) {
+		Driver driver = muberService.getDriver(Integer.parseInt(conductorId));
+		List<Travel> driverTravels = muberService.getTravelsFromDriver(driver);
+		List<Review> driverReviews = muberService.getReviewsFromDriver(driver);
+		int scoreSum = 0;
+		int scoreCount = 0;
+		double averageScore = 0;
+		for (Iterator<Review> i = driverReviews.iterator(); i.hasNext();) {
+		    Review item = i.next();
+		    scoreSum+=item.getRate();
+		    scoreCount++;
+		}
+		averageScore = scoreSum/scoreCount;
+		
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK");
+		aMap.put("userName", driver.getName());
+		aMap.put("driverTravels", driverTravels);
+		aMap.put("averageScore", averageScore);
+		aMap.put("licenseExpiration", driver.getLicenseExpirationDate());
+		return new Gson().toJson(aMap);
+	}
 //	
 //	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json",consumes = "application/json", headers = "Accept=application/json")
 //	public String getNewPassenger(
@@ -128,12 +128,12 @@ public class MuberRestController {
 //	}
 //
 //	
-//	@RequestMapping(value = "/agregarpasajero", method = RequestMethod.PUT, produces = "application/json")
-//	public String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//		aMap.put("result", "OK");
-//		return new Gson().toJson(aMap);
-//	}
+	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json")
+	public @ResponseBody String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK");
+		return new Gson().toJson(aMap);
+	}
 //	
 //	@RequestMapping(value = "/viajes/calificar", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 //	public String rateToTravel(
