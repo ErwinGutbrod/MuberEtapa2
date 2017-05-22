@@ -57,7 +57,6 @@ public class TravelDAOHibernateImpl extends GenericDAOHibernateImpl<Travel, Inte
 		        .setParameter( "idTravel", travel.getIdTravel() )
 		        .executeUpdate();
 		trans.commit();
-		session.close();
 		return this.get(Travel.class, travel.getIdTravel());
 	}
 

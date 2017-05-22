@@ -37,8 +37,8 @@ public class MuberServiceImpl implements MuberService{
 
 	@Override
 	public void AddPassengerToTravel(Travel travel, Passenger passenger1) {
-		// TODO Auto-generated method stub
-		
+		this.muber.AddPassengerToTravel(travel, passenger1);
+
 	}
 
 	@Override
