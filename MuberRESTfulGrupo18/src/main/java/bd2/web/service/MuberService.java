@@ -34,11 +34,7 @@ public interface MuberService {
 	public List<Passenger> getPassengers();
 	public void setPassengers(ArrayList<Passenger> passengers);	
 	public void setTravels(ArrayList<Travel> travels);
-	
-	
-	
-	
-	
-	
+	public Passenger getPassenger(int idPassenger);
+	public boolean updatePassenger(Passenger aPassenger);
 	
 }

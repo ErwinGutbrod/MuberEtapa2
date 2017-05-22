@@ -82,6 +82,20 @@ public class Muber {
 		}
 		return aPassenger;
 	}
+	public boolean updatePassenger(Passenger aPassenger){
+		try {
+				Passenger passenger = this.getPassenger(aPassenger.getIdUser());
+				if (passenger != null){
+					passenger.setCredit(aPassenger.getCredit());
+					this.DAOPassenger.saveOrUpdate(passenger);
+					return true;
+				}
+			} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 	public void endTravel(Travel travel) {
 		try {

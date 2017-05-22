@@ -176,19 +176,21 @@ public class MuberRestController {
 //		return new Gson().toJson(aMap);
 //	}
 //	
-	
-	/// Andrea
+	// *************************************** Cambiar PUTpor POST y despues volver a cambiar
 //	@RequestMapping(value = "/pasajeros/cargarCredito", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
 //	public @ResponseBody String insertCredit(@RequestBody CargarCredito cargarCredito) {
-//		
-//		if (){
-//			
-//		}
-//		
-//		
+//				
+//		Passenger aPassenger = new Passenger();
+//		aPassenger.setIdUser(cargarCredito.getPasajeroId());
+//		aPassenger.setCredit(cargarCredito.getMonto());
 //		
 //		Map<String, Object> aMap = new HashMap<String, Object>();
-//		aMap.put("result", "OK");
+//
+//		if (this.muberService.updatePassenger(aPassenger)){
+//			aMap.put("result", "OK");
+//		}else{
+//			aMap.put("result", "fail");
+//		}
 //		return new Gson().toJson(aMap);
 //	}
 //		

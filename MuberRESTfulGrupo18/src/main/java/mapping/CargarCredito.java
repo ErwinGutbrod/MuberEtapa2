@@ -2,8 +2,8 @@ package mapping;
 
 public class CargarCredito {
 
-	 String pasajeroId;
-	 String monto;
+	 int pasajeroId;
+	 double monto;
 	 
 	 
 	 
@@ -11,21 +11,21 @@ public class CargarCredito {
 		super();
 	}
 	
-	public CargarCredito(String pasajeroId, String monto) {
+	public CargarCredito(int pasajeroId, double monto) {
 		super();
 		this.pasajeroId = pasajeroId;
 		this.monto = monto;
 	}
-	public String getPasajeroId() {
+	public int getPasajeroId() {
 		return pasajeroId;
 	}
-	public void setPasajeroId(String pasajeroId) {
+	public void setPasajeroId(int pasajeroId) {
 		this.pasajeroId = pasajeroId;
 	}
-	public String getMonto() {
+	public double getMonto() {
 		return monto;
 	}
-	public void setMonto(String monto) {
+	public void setMonto(double monto) {
 		this.monto = monto;
 	}
 	 

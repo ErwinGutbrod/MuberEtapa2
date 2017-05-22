@@ -131,4 +131,14 @@ public class MuberServiceImpl implements MuberService{
 		return false;
 	}
 
+	@Override
+	public Passenger getPassenger(int idPassenger) {
+		return this.muber.getPassenger(idPassenger);
+	}
+
+	@Override
+	public boolean updatePassenger(Passenger aPassenger) {
+		return this.muber.updatePassenger(aPassenger);
+	}
+
 }
