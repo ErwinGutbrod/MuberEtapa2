@@ -131,12 +131,12 @@ public class MuberRestController {
 	}
 //
 
-	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
-	public @ResponseBody String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
-		Map<String, Object> aMap = new HashMap<String, Object>();
-		aMap.put("result", "OK");
-		return new Gson().toJson(aMap);
-	}
+//	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+//	public @ResponseBody String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
+//		Map<String, Object> aMap = new HashMap<String, Object>();
+//		aMap.put("result", "OK");
+//		return new Gson().toJson(aMap);
+//	}
 //	
 
 	
@@ -174,22 +174,22 @@ public class MuberRestController {
 	}
 	
 	// *************************************** Cambiar PUTpor POST y despues volver a cambiar
-//	@RequestMapping(value = "/pasajeros/cargarCredito", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
-//	public @ResponseBody String insertCredit(@RequestBody CargarCredito cargarCredito) {
-//				
-//		Passenger aPassenger = new Passenger();
-//		aPassenger.setIdUser(cargarCredito.getPasajeroId());
-//		aPassenger.setCredit(cargarCredito.getMonto());
-//		
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//
-//		if (this.muberService.updatePassenger(aPassenger)){
-//			aMap.put("result", "OK");
-//		}else{
-//			aMap.put("result", "fail");
-//		}
-//		return new Gson().toJson(aMap);
-//	}
+	@RequestMapping(value = "/pasajeros/cargarCredito", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
+	public String insertCredit(@RequestBody CargarCredito cargarCredito) {
+				
+		Passenger aPassenger = new Passenger();
+		aPassenger.setIdUser(cargarCredito.getPasajeroId());
+		aPassenger.setCredit(cargarCredito.getMonto());
+		
+		Map<String, Object> aMap = new HashMap<String, Object>();
+
+		if (this.muberService.updatePassenger(aPassenger)){
+			aMap.put("result", "OK");
+		}else{
+			aMap.put("result", "fail");
+		}
+		return new Gson().toJson(aMap);
+	}
 //		
 	
 	
