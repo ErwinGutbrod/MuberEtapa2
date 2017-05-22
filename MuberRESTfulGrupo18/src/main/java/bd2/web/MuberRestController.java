@@ -24,6 +24,7 @@ import bd2.Muber.model.Review;
 import bd2.Muber.model.Travel;
 import bd2.web.service.MuberService;
 import mapping.AgregarPasajero;
+import mapping.CargarCredito;
 
 @ControllerAdvice
 @RequestMapping("/services")
@@ -60,6 +61,7 @@ public class MuberRestController {
 		return new Gson().toJson(aMap);
 	}
 	
+	///////****************************************************************
 //	@RequestMapping(value = "/conductores/detalle", method = RequestMethod.GET, produces = "application/json", headers = "Accept=application/json")
 //	public String getDriverDetail(
 //			@RequestParam(value="conductorId", required = true) String conductorId) {
@@ -85,6 +87,8 @@ public class MuberRestController {
 //		return new Gson().toJson(aMap);
 //	}
 //	
+	
+	///////****************************************************************
 //	@RequestMapping(value = "/pasajero/nuevo", method = RequestMethod.POST, produces = "application/json",consumes = "application/json", headers = "Accept=application/json")
 //	public String getNewPassenger(
 //			@RequestParam(value="name", required = true) String name,
@@ -102,6 +106,9 @@ public class MuberRestController {
 //		return new Gson().toJson(aMap);
 //	}
 //	
+
+///////****************************************************************
+
 //	@RequestMapping(value = "/viajes/nuevo", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 //	public String getNewTravel(
 //			@RequestParam(value="origen", required = true) String origen,
@@ -127,7 +134,7 @@ public class MuberRestController {
 //		return new Gson().toJson(aMap);
 //	}
 //
-//	
+//	******ERWIN
 //	@RequestMapping(value = "/agregarpasajero", method = RequestMethod.PUT, produces = "application/json")
 //	public String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
 //		Map<String, Object> aMap = new HashMap<String, Object>();
@@ -135,6 +142,9 @@ public class MuberRestController {
 //		return new Gson().toJson(aMap);
 //	}
 //	
+
+	
+	///////****************************************************************
 //	@RequestMapping(value = "/viajes/calificar", method = RequestMethod.POST, produces = "application/json", headers = "Accept=application/json")
 //	public String rateToTravel(
 //			@RequestParam(value="viajeId", required = true) String viajeId,
@@ -167,20 +177,33 @@ public class MuberRestController {
 //		return new Gson().toJson(aMap);
 //	}
 //	
+	
+	/// Andrea
 //	@RequestMapping(value = "/pasajeros/cargarCredito", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
-//	public String insertCredit(
-//			@RequestParam(value="pasajeroId", required = true) String pasajeroId,
-//			@RequestParam(value="monto", required = true) String monto) {
+//	public @ResponseBody String insertCredit(@RequestBody CargarCredito cargarCredito) {
+//		
+//		if (){
+//			
+//		}
+//		
+//		
+//		
 //		Map<String, Object> aMap = new HashMap<String, Object>();
 //		aMap.put("result", "OK");
 //		return new Gson().toJson(aMap);
 //	}
-//			
+//		
+	
+	
+// ****************
 //	@RequestMapping(value = "/viajes/finalizar", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
-//	public String finishTravel(
-//			@RequestParam(value="viajeId", required = true) String viajeId) {
+//	public @ResponseBody String finishTravel(@RequestBody String viajeId) {
 //		// Corroborarar que se finalice una vez
 //		Map<String, Object> aMap = new HashMap<String, Object>();
+//		Travel travel = new Travel();
+//		travel.setIdTravel(Integer.parseInt(viajeId));
+//		muberService.endTravel(travel);
+//		
 //		aMap.put("result", "OK");
 //		return new Gson().toJson(aMap);
 //	}		

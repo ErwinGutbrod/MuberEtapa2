@@ -72,8 +72,13 @@ public class Muber {
 
 	}
 
-	public void EndTravel(Travel travel) {
-		
+	public void endTravel(Travel travel) {
+		try {
+			this.DAOTravel.endTravel(travel);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void PersistObject (SessionFactory sf,Object o){

@@ -21,7 +21,7 @@ public interface MuberService {
 	public void AddPassenger(Passenger passenger);
 	public void AddPassengerToTravel(Travel travel, Passenger passenger1);
 	public List<Travel> getTravelsFromDriver(Driver driver);
-	public void EndTravel(Travel travel);
+	public void endTravel(Travel travel);
 	public boolean idTravelFinaliced(int idTravel);
 	
 	//Review

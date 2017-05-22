@@ -42,8 +42,8 @@ public class MuberServiceImpl implements MuberService{
 	}
 
 	@Override
-	public void EndTravel(Travel travel) {
-		// TODO Auto-generated method stub
+	public void endTravel(Travel travel) {
+		this.muber.endTravel(travel);
 		
 	}
 
