@@ -129,15 +129,15 @@ public class MuberRestController {
 		aMap.put("result", "OK");
 		return new Gson().toJson(aMap);
 	}
-//
 
-//	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
-//	public @ResponseBody String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
-//		Map<String, Object> aMap = new HashMap<String, Object>();
-//		aMap.put("result", "OK");
-//		return new Gson().toJson(aMap);
-//	}
-//	
+
+	@RequestMapping(value = "/viajes/agregarPasajero", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+	public @ResponseBody String addPassengerInTravel(@RequestBody AgregarPasajero unaInsancia) {
+		Map<String, Object> aMap = new HashMap<String, Object>();
+		aMap.put("result", "OK");
+		return new Gson().toJson(aMap);
+	}
+	
 
 	
 	///////****************************************************************
@@ -192,15 +192,20 @@ public class MuberRestController {
 	
 // **************** Falta probar
 	@RequestMapping(value = "/viajes/finalizar", method = RequestMethod.PUT, produces = "application/json", headers = "Accept=application/json")
-	public @ResponseBody String finishTravel(@RequestBody String viajeId) {
+	public @ResponseBody String finishTravel(@RequestBody String viajeId) throws NumberFormatException, Exception {
 		// Corroborarar que se finalice una vez
 		Map<String, Object> aMap = new HashMap<String, Object>();
 
 		Travel travel = muberService.getTravel(Integer.parseInt(viajeId));
 
-		muberService.endTravel(travel);
-		
-		aMap.put("result", "OK");
+		if(muberService.idTravelFinaliced(Integer.parseInt(viajeId))){
+			muberService.endTravel(travel);
+			aMap.put("result", "OK");
+		}else{
+			aMap.put("result", "fail");
+
+		}
+
 		return new Gson().toJson(aMap);
 	}		
 //	
